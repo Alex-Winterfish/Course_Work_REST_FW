@@ -13,6 +13,4 @@ class CustomUserSerializer(serializers.ModelSerializer):
             "password",
             "country",
             "phone",
-            "user_payments",
-            "user_subscriptions",
         ]
