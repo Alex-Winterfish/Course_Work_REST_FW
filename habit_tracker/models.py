@@ -1,16 +1,33 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 
+class RewordModel(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Автор привички', null=True, blank=True)
+    '''Модель вознаграждения model: habit_tracker.models.RewordModel.'''
+    name = models.CharField(max_length=200, verbose_name='название вознаграждения')
+    description = models.CharField(max_length=1000, verbose_name='описнаие вознаграждения')
+
+    def __str__(self):
+        return f'Вознаграждение {self.name}'
+    class Meta:
+        verbose_name = 'Вознаграждение'
+        verbose_name_plural = 'Вознаграждения'
+
+
 class HabitModel(models.Model):
     '''Модель привычки model: habit_tracker.models.HabitModel.'''
-    name = models.TimeField(max_length=200, verbose_name='Название привычки')
-    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Автор привички', related_name='user')
+
+    name = models.CharField(max_length=200, verbose_name='Название привычки')
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Автор привички', related_name='user', blank=True)
     location = models.CharField(max_length=400, verbose_name='место выполнеия привычки')
-    perform_time = models.TimeField(verbose_name='когда выполнять привичку')
+    perform_time = models.TimeField(verbose_name='когда выполнять привичку', null=True)
     substance = models.CharField(max_length=2000, verbose_name='содержание привычки')
-    is_pleasant = models.BooleanField(verbose_name='признак приятной привычки')
-    period = models.DateField(verbose_name='периодичность выполнения')
-    reword = models.ManyToManyField('habit_tracker.RewordModel', verbose_name='вознаграждение')
+    is_pleasant = models.BooleanField(verbose_name='признак приятной привычки', default=False)
+    period = models.PositiveIntegerField(verbose_name='периодичность выполения', null=True)
+    reword = models.ForeignKey('habit_tracker.RewordModel', verbose_name='вознаграждение',
+                               null=True, on_delete=models.SET_NULL)
+    pleasant_hab = models.ForeignKey('habit_tracker.HabitModel', verbose_name='приятная привычка',
+                                     null=True, on_delete=models.SET_NULL)
     lasting_time = models.TimeField(verbose_name='длительность выполнения',)
 
     def __str__(self):
@@ -24,14 +41,3 @@ class HabitModel(models.Model):
         verbose_name_plural = 'Привычки'
 
 
-class RewordModel(models.Model):
-    '''Модель вознаграждения model: habit_tracker.models.RewordModel.'''
-    name = models.CharField(max_length=200, verbose_name='название вознаграждения')
-    description = models.CharField(max_length=1000, verbose_name='описнаие вознаграждения')
-    habit = models.ManyToManyField('habit_tracker.HabitModel', verbose_name='')
-
-    def __str__(self):
-        return f'Вознаграждение {self.name}'
-    class Meta:
-        verbose_name = 'Вознаграждение'
-        verbose_name_plural = 'Вознаграждения'
