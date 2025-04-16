@@ -65,5 +65,5 @@ class PeriodValidator:
 
         if last_time and (last_time> datetime.time(minute=2)):
             raise ValidationError(detail='Время выполнения не должно быть больше 120 сек.')
-        if period not in ('ежедневно', 'каждые два дня', 'еженедельно'):
+        if period and (period not in ('ежедневно', 'каждые два дня', 'еженедельно')):
             raise ValidationError(detail='Привычку нельзя выполнять реже 1 раза в неделю.')
