@@ -10,7 +10,8 @@ class HabitModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HabitModel
-        fields = '__all__'
+        fields = ['name', 'substance', 'location', 'perform_time', 'period', 'lasting_time','is_pleasant', 'is_public',
+                  'pleasant_hab', 'reword',  'user']
         validators = [ExcludeRewordValidator(field_pls='pleasant_hab', field_rew='reword'),
                       PeriodValidator(field_period='period', field_last_time='lasting_time')]
 

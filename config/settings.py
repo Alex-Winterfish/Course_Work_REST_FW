@@ -144,6 +144,9 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+TELEGRAM_URL = f'https://api.telegram.org/bot'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
@@ -185,8 +188,8 @@ CELERY_TASK_TIME_LIMIT = 30
 
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
-        'task': 'ed_platform.tasks',
-        'schedule': timedelta(minutes=10),
+        'task': 'habit_tracker.tasks.reminder_task',
+        'schedule': timedelta(seconds=30),
     },
 }
 

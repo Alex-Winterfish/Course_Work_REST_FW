@@ -3,8 +3,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from habit_tracker.models import HabitModel, RewordModel
+from habit_tracker.pagination import MyPagination
 from habit_tracker.serializers import HabitModelSerializer, RewordModelSerializer
-
+from rest_framework.response import Response
 
 
 
@@ -20,6 +21,14 @@ class HabitViewSet(ModelViewSet):
     '''ViewSet для операций над model: habit_tracker.HabitModel.'''
     queryset = HabitModel.objects.all()
     serializer_class = HabitModelSerializer
+    def list_public_habits(self, request):
+        queryset = HabitModel.objects.filter(is_public=True)
+        paginator = MyPagination()
+        paginated_queryset = paginator.paginate_queryset(queryset, request)
+        serializer = HabitModelSerializer(paginated_queryset, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+
 
     def get_queryset(self):
         user = self.request.user

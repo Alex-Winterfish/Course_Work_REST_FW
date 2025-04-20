@@ -4,8 +4,9 @@ from django.db import models
 
 
 class RewordModel(models.Model):
-    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Автор привички', null=True, blank=True)
     '''Модель вознаграждения model: habit_tracker.models.RewordModel.'''
+
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Автор привички', null=True, blank=True)
     name = models.CharField(max_length=200, verbose_name='название вознаграждения')
     description = models.CharField(max_length=1000, verbose_name='описнаие вознаграждения')
 
@@ -19,16 +20,17 @@ class RewordModel(models.Model):
 class HabitModel(models.Model):
     '''Модель привычки model: habit_tracker.models.HabitModel.'''
 
-    DAILY = "ежедневно"
-    EVERY_TWO_DAYS = "каждые два дня"
-    WEEKLY = "еженедельно"
+    DAILY = 'ежедневно'
+    EVERY_TWO_DAYS = 'каждые два дня'
+    WEEKLY = 'еженедельно'
 
     STATUS_IN_CHOICES = [
-        (DAILY, "ежедневно"),
-        (EVERY_TWO_DAYS, "каждые два дня"),
-        (WEEKLY, "еженедельно")
+        (DAILY, 'ежедневно'),
+        (EVERY_TWO_DAYS, 'каждые два дня'),
+        (WEEKLY, 'еженедельно')
     ]
 
+    created_at = models.DateField(auto_now_add=True, verbose_name='дата создания привычки')
     name = models.CharField(max_length=200, verbose_name='Название привычки')
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, verbose_name='Автор привички', related_name='user', blank=True)
     location = models.CharField(max_length=400, verbose_name='место выполнеия привычки')
@@ -47,7 +49,7 @@ class HabitModel(models.Model):
         if self.is_pleasant:
             return f'Привычка {self.name}'
         else:
-            return f'Привычка {self.name}, не реже одного раза в {self.period}.'
+            return f'Привычка {self.name}, выполняется {self.period}.'
 
     class Meta:
         verbose_name = 'Привычка'
