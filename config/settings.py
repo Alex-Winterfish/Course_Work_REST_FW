@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_celery_beat',
     'celery',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -137,15 +140,8 @@ LOGIN_URL = 'login/'
 LOGIN_REDIRECT_URL = ''
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 BOT_TOKEN = os.getenv('BOT_TOKEN')
-TELEGRAM_URL = f'https://api.telegram.org/bot'
+TELEGRAM_URL = 'https://api.telegram.org/bot'
 
 
 REST_FRAMEWORK = {
@@ -189,13 +185,9 @@ CELERY_TASK_TIME_LIMIT = 30
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
         'task': 'habit_tracker.tasks.reminder_task',
-        'schedule': timedelta(seconds=30),
+        'schedule': timedelta(seconds=600),
     },
 }
-
-# settings.py
-
-import os
 
 LOGGING = {
     'version': 1,
@@ -232,3 +224,13 @@ LOGGING = {
         },
     },
 }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.127.0.0.1:8000",
+]
+
+CORS_ALLOW_ALL_ORIGINS = False

@@ -3,9 +3,9 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    '''Модель пользователя model: users.CustomUser'''
+    """Модель пользователя model: users.CustomUser"""
 
-    chat_id = models.CharField(max_length=100, verbose_name='id чата в телеграм')
+    chat_id = models.CharField(max_length=100, verbose_name="id чата в телеграм")
     email = models.EmailField(unique=True, verbose_name="Email")
     avatar = models.ImageField(
         upload_to="users/avatars/", verbose_name="Аватар", null=True, blank=True

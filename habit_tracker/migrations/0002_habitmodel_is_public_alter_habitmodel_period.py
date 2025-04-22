@@ -6,18 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habit_tracker', '0001_initial'),
+        ("habit_tracker", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='habitmodel',
-            name='is_public',
-            field=models.BooleanField(default=False, verbose_name='признак публичности'),
+            model_name="habitmodel",
+            name="is_public",
+            field=models.BooleanField(
+                default=False, verbose_name="признак публичности"
+            ),
         ),
         migrations.AlterField(
-            model_name='habitmodel',
-            name='period',
-            field=models.CharField(choices=[('ежедневно', 'ежедневно'), ('каждые два дня', 'каждые два дня'), ('еженедельно', 'еженедельно')], default='ежедневно', verbose_name='периодичность выполнения'),
+            model_name="habitmodel",
+            name="period",
+            field=models.CharField(
+                choices=[
+                    ("ежедневно", "ежедневно"),
+                    ("каждые два дня", "каждые два дня"),
+                    ("еженедельно", "еженедельно"),
+                ],
+                default="ежедневно",
+                verbose_name="периодичность выполнения",
+            ),
         ),
     ]

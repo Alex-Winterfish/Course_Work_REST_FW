@@ -15,36 +15,125 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='RewordModel',
+            name="RewordModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='название вознаграждения')),
-                ('description', models.CharField(max_length=1000, verbose_name='описнаие вознаграждения')),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Автор привички')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=200, verbose_name="название вознаграждения"
+                    ),
+                ),
+                (
+                    "description",
+                    models.CharField(
+                        max_length=1000, verbose_name="описнаие вознаграждения"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Автор привички",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Вознаграждение',
-                'verbose_name_plural': 'Вознаграждения',
+                "verbose_name": "Вознаграждение",
+                "verbose_name_plural": "Вознаграждения",
             },
         ),
         migrations.CreateModel(
-            name='HabitModel',
+            name="HabitModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Название привычки')),
-                ('location', models.CharField(max_length=400, verbose_name='место выполнеия привычки')),
-                ('perform_time', models.TimeField(null=True, verbose_name='когда выполнять привичку')),
-                ('substance', models.CharField(max_length=2000, verbose_name='содержание привычки')),
-                ('is_pleasant', models.BooleanField(default=False, verbose_name='признак приятной привычки')),
-                ('period', models.DateField(null=True, verbose_name='периодичность выполения')),
-                ('lasting_time', models.TimeField(verbose_name='длительность выполнения')),
-                ('pleasant_hab', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='habit_tracker.habitmodel', verbose_name='приятная привычка')),
-                ('user', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='user', to=settings.AUTH_USER_MODEL, verbose_name='Автор привички')),
-                ('reword', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='habit_tracker.rewordmodel', verbose_name='вознаграждение')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=200, verbose_name="Название привычки"),
+                ),
+                (
+                    "location",
+                    models.CharField(
+                        max_length=400, verbose_name="место выполнеия привычки"
+                    ),
+                ),
+                (
+                    "perform_time",
+                    models.TimeField(
+                        null=True, verbose_name="когда выполнять привичку"
+                    ),
+                ),
+                (
+                    "substance",
+                    models.CharField(
+                        max_length=2000, verbose_name="содержание привычки"
+                    ),
+                ),
+                (
+                    "is_pleasant",
+                    models.BooleanField(
+                        default=False, verbose_name="признак приятной привычки"
+                    ),
+                ),
+                (
+                    "period",
+                    models.DateField(null=True, verbose_name="периодичность выполения"),
+                ),
+                (
+                    "lasting_time",
+                    models.TimeField(verbose_name="длительность выполнения"),
+                ),
+                (
+                    "pleasant_hab",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="habit_tracker.habitmodel",
+                        verbose_name="приятная привычка",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        blank=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="user",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Автор привички",
+                    ),
+                ),
+                (
+                    "reword",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="habit_tracker.rewordmodel",
+                        verbose_name="вознаграждение",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Привычка',
-                'verbose_name_plural': 'Привычки',
+                "verbose_name": "Привычка",
+                "verbose_name_plural": "Привычки",
             },
         ),
     ]

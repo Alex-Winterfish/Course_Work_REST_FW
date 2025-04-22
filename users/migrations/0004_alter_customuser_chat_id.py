@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0003_alter_customuser_chat_id'),
+        ("users", "0003_alter_customuser_chat_id"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='chat_id',
-            field=models.CharField(max_length=100, verbose_name='id чата в телеграм'),
+            model_name="customuser",
+            name="chat_id",
+            field=models.CharField(max_length=100, verbose_name="id чата в телеграм"),
         ),
     ]

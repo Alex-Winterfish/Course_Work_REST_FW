@@ -7,14 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('habit_tracker', '0002_habitmodel_is_public_alter_habitmodel_period'),
+        ("habit_tracker", "0002_habitmodel_is_public_alter_habitmodel_period"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='habitmodel',
-            name='created_at',
-            field=models.DateField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='дата создания привычки'),
+            model_name="habitmodel",
+            name="created_at",
+            field=models.DateField(
+                auto_now_add=True,
+                default=django.utils.timezone.now,
+                verbose_name="дата создания привычки",
+            ),
             preserve_default=False,
         ),
     ]
