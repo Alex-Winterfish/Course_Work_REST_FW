@@ -8,16 +8,18 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        IntervalSchedule.objects.all().delete()
+
         new_schedule = {"every": 600, "period": IntervalSchedule.SECONDS}
 
         schedule, created = IntervalSchedule.objects.get_or_create(**new_schedule)
 
         new_task = {
             "interval": schedule,
-            "name": "user_deactivate",
+            "name": "reminder_task",
             "task": "habit_tracker.tasks.reminder_task",
         }
 
         PeriodicTask.objects.create(**new_task)
 
-        self.stdout.write(self.style.SUCCESS("Successfully set the schedule"))
+        self.stdout.write(self.style.SUCCESS("Установленно расписание для задачи user_deactivate"))
