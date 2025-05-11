@@ -36,6 +36,8 @@ services:
       - static_volume:/app/staticfiles
     depends_on:
       - habit_tracker
+    networks:
+      app_network:
 
   db:
     image: postgres
