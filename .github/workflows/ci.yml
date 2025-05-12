@@ -30,6 +30,7 @@ jobs:
 
     - name: Run migrations
       env:
+        DJANGO_USE_SQLITE: 'true'
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: python manage.py migrate
 
