@@ -85,8 +85,8 @@ if "test" in sys.argv:
             "NAME": BASE_DIR / "test_db.sqlite3",
         }
     }
-
 else:
+
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
