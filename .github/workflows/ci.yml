@@ -30,7 +30,7 @@ jobs:
 
     - name: Run migrations
       env:
-        DJANGO_USE_SQLITE: 'true'
+        DATABASE_URL: sqlite:///db.sqlite3
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: python manage.py migrate
 
