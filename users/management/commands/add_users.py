@@ -36,9 +36,7 @@ class Command(BaseCommand):
                 )
             else:
                 self.stdout.write(
-                    self.style.WARNING(
-                        f"Пользователь уже существует {user.username}"
-                    )
+                    self.style.WARNING(f"Пользователь уже существует {user.username}")
                 )
 
         pleasant_habits = [
@@ -48,7 +46,7 @@ class Command(BaseCommand):
                 "location": "everywhere",
                 "lasting_time": "00:02:00",
                 "substance": "substance of pleasant habit #1",
-                "is_pleasant": True
+                "is_pleasant": True,
             },
             {
                 "name": "pleasant habit #2",
@@ -56,8 +54,8 @@ class Command(BaseCommand):
                 "location": "everywhere",
                 "lasting_time": "00:02:00",
                 "substance": "substance of pleasant habit #1",
-                "is_pleasant": True
-             }
+                "is_pleasant": True,
+            },
         ]
 
         for habit_data in pleasant_habits:
@@ -67,17 +65,17 @@ class Command(BaseCommand):
                     self.style.SUCCESS(f"Создана приятная привычка {habit.name}")
                 )
             else:
-                self.stdout.write(
-                    self.style.WARNING(
-                        "Привычка уже сужествует"
-                    )
-                )
+                self.stdout.write(self.style.WARNING("Привычка уже сужествует"))
 
         rewords = [
-            {"user": CustomUser.objects.get(email="user_1@mail.com"),
-             "name": "reword #1"},
-            {"user": CustomUser.objects.get(email="user_2@mail.com"),
-             "name": "reword #2"}
+            {
+                "user": CustomUser.objects.get(email="user_1@mail.com"),
+                "name": "reword #1",
+            },
+            {
+                "user": CustomUser.objects.get(email="user_2@mail.com"),
+                "name": "reword #2",
+            },
         ]
 
         for reword_data in rewords:
@@ -87,13 +85,7 @@ class Command(BaseCommand):
                     self.style.SUCCESS(f"Создано вознаграждение {reword.name}")
                 )
             else:
-                self.stdout.write(
-                    self.style.WARNING(
-                        "Вознаграждение уже сужествует"
-                    )
-                )
-
-
+                self.stdout.write(self.style.WARNING("Вознаграждение уже сужествует"))
 
         good_habits = [
             {
@@ -105,27 +97,30 @@ class Command(BaseCommand):
                 "period": "ежедневно",
                 "substance": "substance of good habit #1",
                 "reword": RewordModel.objects.get(name="reword #1"),
-                "is_public": True
+                "is_public": True,
             },
-            {"name": "good habit #2",
+            {
+                "name": "good habit #2",
                 "user": CustomUser.objects.get(email="user_1@mail.com"),
                 "location": "everywhere",
                 "perform_time": "08:00:00",
                 "lasting_time": "00:02:00",
                 "period": "еженедельно",
                 "substance": "substance of good habit #2",
-                "pleasant_hab": HabitModel.objects.get(name="pleasant habit #1")
+                "pleasant_hab": HabitModel.objects.get(name="pleasant habit #1"),
             },
-            {"name": "good habit #3",
+            {
+                "name": "good habit #3",
                 "user": CustomUser.objects.get(email="user_2@mail.com"),
                 "location": "everywhere",
                 "perform_time": "12:00:00",
                 "lasting_time": "00:02:00",
                 "period": "каждые два дня",
                 "substance": "substance of good habit #3",
-                "reword": RewordModel.objects.get(name="reword #2")
+                "reword": RewordModel.objects.get(name="reword #2"),
             },
-            {"name": "good habit #4",
+            {
+                "name": "good habit #4",
                 "user": CustomUser.objects.get(email="user_1@mail.com"),
                 "location": "everywhere",
                 "perform_time": "20:00:00",
@@ -133,8 +128,8 @@ class Command(BaseCommand):
                 "substance": "substance of good habit #4",
                 "period": "каждые два дня",
                 "pleasant_hab": HabitModel.objects.get(name="pleasant habit #2"),
-                "is_public": True
-            }
+                "is_public": True,
+            },
         ]
 
         for habit_data in good_habits:
@@ -144,9 +139,4 @@ class Command(BaseCommand):
                     self.style.SUCCESS(f"Создана хорошая привычка {habit.name}")
                 )
             else:
-                self.stdout.write(
-                    self.style.WARNING(
-                        "Привычка уже сужествует"
-                    )
-                )
-
+                self.stdout.write(self.style.WARNING("Привычка уже сужествует"))

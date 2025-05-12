@@ -22,4 +22,6 @@ class Command(BaseCommand):
 
         PeriodicTask.objects.create(**new_task)
 
-        self.stdout.write(self.style.SUCCESS("Установленно расписание для задачи user_deactivate"))
+        self.stdout.write(
+            self.style.SUCCESS("Установленно расписание для задачи user_deactivate")
+        )
