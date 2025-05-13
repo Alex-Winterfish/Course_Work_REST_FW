@@ -2,6 +2,8 @@ name: Habit_Tracker CI
 
 on: [push , pull_request]
 
+env:
+  SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 jobs:
 
   test:
@@ -30,8 +32,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run migrations
-      env:
-        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
       run: python manage.py migrate
 
     - name: Run tests
