@@ -88,7 +88,6 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          rm -r ${{ secrets.DEPLOY_DIR }} || true
           mkdir ${{ secrets.DEPLOY_DIR }}
           cd ${{ secrets.DEPLOY_DIR }}
           docker pull ${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker:${{ github.sha }}
