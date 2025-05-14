@@ -89,7 +89,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           rm -r ${{ secrets.DEPLOY_DIR }} || true
-          mkdir ${{ secrets.DEPLOY_DIR }} || true
+          mkdir ${{ secrets.DEPLOY_DIR }}
           cd ${{ secrets.DEPLOY_DIR }}
           docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/habit_tracker:${{ github.sha }}
           docker stop habit_tracker || true
