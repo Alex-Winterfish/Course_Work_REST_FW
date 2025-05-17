@@ -88,5 +88,4 @@ jobs:
             docker stop habit_tracker || true
             docker rm habit_tracker || true
             docker run -d --name habit_tracker --env-file $(pwd)/.env -p 80:8000 ${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker:${{ github.sha }}
-            docker-compose up -d --remove-orphans
           EOF
