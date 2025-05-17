@@ -70,7 +70,7 @@ jobs:
         run: docker build -t "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker" .
 
       - name: Build nginx image
-        run: docker build -t "${{ secrets.DOCKER_HUB_USERNAME }}/nginx-custom" ./nginx
+        run: docker build -t "${{ secrets.DOCKER_HUB_USER_NAME }}/nginx-custom" ./nginx
 
       - name: Push Habit-tracker image to Docker Hub
         run: docker push "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker"
