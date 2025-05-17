@@ -66,11 +66,17 @@ jobs:
       - name: Log in Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USER_NAME }}" --password-stdin
 
-      - name: Build Docker image
+      - name: Build Habit-tracker image
         run: docker build -t "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker" .
 
-      - name: Push Docker image to Docker Hub
+      - name: Build nginx image
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/nginx-custom:latest ./nginx
+
+      - name: Push Habit-tracker image to Docker Hub
         run: docker push "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker"
+
+      - name: Push Nginx image to Docker Hub
+        run: docker push "${{ secrets.DOCKER_HUB_USER_NAME }}/nginx-custom:latest"
 
   deploy:
     needs: build
