@@ -1,6 +1,6 @@
 FROM python:3.12
 
-WORKDIR /app
+WORKDIR /habit_tracker
 
 RUN apt-get update \
   && apt-get install -y gcc libpq-dev python3-dev \
