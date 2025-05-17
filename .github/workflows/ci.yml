@@ -86,5 +86,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             cd habit_tracker
             docker-compose down || true
-            docker-compose pull ${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker:${{ github.sha }}
+            docker pull ${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker:${{ github.sha }}
+            docker-compose up -d --remove-orphans
           EOF
