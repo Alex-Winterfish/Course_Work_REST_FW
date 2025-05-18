@@ -93,7 +93,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install --only-upgrade docker-ce docker-ce-cli containerd.io
             cd habit_tracker
-            docker stop habit_tracker || true
-            docker rm habit_tracker || true
+            docker-compose down || true
             docker-compose up -d
           EOF
