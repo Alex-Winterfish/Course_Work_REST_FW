@@ -67,10 +67,10 @@ jobs:
         run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USER_NAME }}" --password-stdin
 
       - name: Build Habit-tracker image
-        run: docker build -t "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker" .
+        run: docker build --no-cache -t "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker" .
 
       - name: Build nginx image
-        run: docker build -t "${{ secrets.DOCKER_HUB_USER_NAME }}/nginx-custom" ./nginx
+        run: docker build --no-cache -t "${{ secrets.DOCKER_HUB_USER_NAME }}/nginx-custom" ./nginx
 
       - name: Push Habit-tracker image to Docker Hub
         run: docker push "${{ secrets.DOCKER_HUB_USER_NAME }}/habit_tracker"
