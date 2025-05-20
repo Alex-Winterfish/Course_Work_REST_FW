@@ -238,7 +238,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://read-and-write.127.0.0.1:8000",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 if "test" in sys.argv:
     DATABASES = {
