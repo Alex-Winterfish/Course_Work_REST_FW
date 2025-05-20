@@ -20,7 +20,6 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,11 +76,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if os.getenv('GITHUB_ACTIONS') == 'true':
+if os.getenv("GITHUB_ACTIONS") == "true":
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 else:
