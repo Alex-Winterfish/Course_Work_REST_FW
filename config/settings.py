@@ -230,10 +230,8 @@ LOGGING = {
     },
 }
 
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://read-and-write.127.0.0.1:8000",
-]
+CSRF_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = []
 
 CORS_ALLOW_ALL_ORIGINS = True
 
