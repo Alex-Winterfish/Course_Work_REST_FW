@@ -243,4 +243,3 @@ if "test" in sys.argv:
         }
     }
 
-ALLOWED_HOSTS = ["*"]

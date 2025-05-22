@@ -8,8 +8,8 @@ services:
     volumes:
       - habit_tracker:/habit_tracker
       - static_volume:/code/static
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     depends_on:
       [db]
     networks:
