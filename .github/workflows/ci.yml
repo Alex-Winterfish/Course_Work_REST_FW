@@ -93,6 +93,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install 
             cd habit_tracker
-            docker-compose down || true
-            docker-compose up -d
+            sudo docker compose down || true
+            sudo docker compose up -d
           EOF

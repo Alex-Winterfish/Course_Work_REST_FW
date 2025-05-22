@@ -242,3 +242,5 @@ if "test" in sys.argv:
             "NAME": BASE_DIR / "test_db.sqlite3",
         }
     }
+
+ALLOWED_HOSTS = ["*"]
