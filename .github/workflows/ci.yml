@@ -90,9 +90,7 @@ jobs:
       - name: Deploy to server via SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            sudo apt-get update
-            sudo apt-get install 
             cd habit_tracker
             sudo docker compose down || true
-            sudo docker compose up -d
+            sudo docker compose up -d --build
           EOF
