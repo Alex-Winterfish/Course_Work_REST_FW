@@ -6,8 +6,10 @@ services:
             gunicorn config.wsgi:application --bind 0.0.0.0:8000 && celery -A config worker -l INFO &&
             celery -A config beat -l INFO -S django"
     volumes:
-      - ./staticfiles:/app/staticfiles
-      - ./static_volume:/app/static
+      - staticfiles:/app/staticfiles
+      - static:/app/static
+    env_file:
+      - .env
     ports:
       - "8000:8000"
     depends_on:
@@ -33,8 +35,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./staticfiles:/app/staticfiles
-      - ./static_volume:/app/staticfiles
+      - staticfiles:/app/staticfiles
+      - static:/app/static
     depends_on:
       - habit_tracker
     networks:
@@ -61,5 +63,6 @@ networks:
 
 volumes:
   postgres_data:
-  static_volume:
+  staticfiles:
+  static:
   habit_tracker:
