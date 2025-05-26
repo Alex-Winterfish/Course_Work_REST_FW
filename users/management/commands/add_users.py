@@ -5,7 +5,7 @@ from habit_tracker.models import HabitModel, RewordModel
 
 
 class Command(BaseCommand):
-    help = "Add users and payments"
+    help = "Add users, habits and good habits"
 
     def handle(self, *args, **kwargs):
         CustomUser.objects.all().delete()
