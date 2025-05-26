@@ -56,6 +56,7 @@ class HabitModel(models.Model):
         verbose_name="признак приятной привычки", default=False
     )
     period = models.CharField(
+        max_length=20,
         choices=STATUS_IN_CHOICES,
         default=DAILY,
         verbose_name="периодичность выполнения",

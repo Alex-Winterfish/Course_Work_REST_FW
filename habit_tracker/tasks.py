@@ -34,6 +34,7 @@ def reminder_task():
                 message = message_compose(object)
                 send_habit(chat_id=chat_id, message=message)
 
+
 @shared_task
 def control_task():
-    return 'celary is working!'
+    return "celary is working!"

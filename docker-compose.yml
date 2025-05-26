@@ -1,19 +1,17 @@
-
-
 services:
   habit_tracker:
-    build: .
-    command: >
-        bash -c "python manage.py migrate && python manage.py add_users && python manage.py set_schedule && python manage.py runserver 0.0.0.0:8000 "
+    image: alexwinterfish/habit_tracker:latest
     env_file:
       - .env
+    command: >
+      sh -c "python manage.py migrate && python manage.py collectstatic --noinput  && gunicorn config.wsgi:application --bind 0.0.0.0:8000 && python manage.py set_schedule  && celery -A config worker -l INFO && celery -A config beat -l INFO -S django"
     volumes:
-      - .:/code
-      - static_volume:/code/static
-    ports:
-      - "8000:8000"
+      - staticfiles:/app/staticfiles
+      - static_volume:/app/static
+    expose:
+      - "8000"
     depends_on:
-      [db]
+      [db, redis]
     networks:
       app_network:
   redis:
@@ -29,6 +27,18 @@ services:
       retries: 5
     networks:
       app_network:
+  nginx:
+    image: alexwinterfish/nginx-custom:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - habit_tracker
+    volumes:
+      - staticfiles:/app/staticfiles
+      - static_volume:/app/static
+    networks:
+      app_network:
+
   db:
     image: postgres
     env_file:
@@ -42,30 +52,8 @@ services:
       retries: 5
     networks:
       app_network:
-  celery:
-    build:
-      context: .
-    command: celery -A config worker -l INFO
     volumes:
-      - .:/app
-    depends_on:
-      - habit_tracker
-      - db
-      - redis
-    networks:
-      app_network:
-  celery_beat:
-    build:
-      context: .
-    command: celery -A config beat -l INFO -S django
-    volumes:
-      - .:/app
-    depends_on:
-      - db
-      - redis
-      - celery
-    networks:
-      app_network:
+      - postgres_data:/var/lib/postgresql/data/
 networks:
   app_network:
     driver: bridge
@@ -73,3 +61,5 @@ networks:
 volumes:
   postgres_data:
   static_volume:
+  staticfiles:
+  nginx:
