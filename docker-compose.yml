@@ -4,14 +4,14 @@ services:
     env_file:
       - .env
     command: >
-      sh -c "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+      sh -c "python manage.py migrate && python manage.py collectstatic --noinput  && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - staticfiles:/app/staticfiles
       - static_volume:/app/static
     expose:
       - "8000"
     depends_on:
-      [db]
+      [db, redis]
     networks:
       app_network:
   redis:
@@ -19,7 +19,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./redis_data:/app/redis_data
+      - ./redis_data:/data
     healthcheck:
       test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
       interval: 10s
